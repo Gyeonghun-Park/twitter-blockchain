@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .test {
-  @apply flex;
+  @apply mr-4 text-xl;
 }
