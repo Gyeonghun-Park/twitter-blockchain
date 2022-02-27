@@ -1,20 +1,63 @@
-import Image from 'next/image'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { BsCardImage, BsEmojiSmile } from 'react-icons/bs'
 import { RiFileGifLine, RiBarChartHorizontalFill } from 'react-icons/ri'
 import { IoMdCalendar } from 'react-icons/io'
 import { MdOutlineLocationOn } from 'react-icons/md'
+import { useTwitter } from '@contexts/TwitterContext'
+import { client } from '@lib/client'
 
 function TweetBox() {
   const [tweetMessage, setTweetMessage] = useState('')
+  const { currentAccount, fetchTweets, currentUser } = useTwitter()
 
   const submitTweet = async (event: any) => {
+    setTweetMessage('')
     event.preventDefault()
+
+    if (!tweetMessage) return
+    const tweetId = `${currentAccount}_${Date.now()}`
+
+    const tweetDoc = {
+      _type: 'tweets',
+      _id: tweetId,
+      tweet: tweetMessage,
+      timestamp: new Date(Date.now()).toISOString(),
+      author: {
+        _key: tweetId,
+        _ref: currentAccount,
+        _type: 'reference',
+      },
+    }
+
+    await client.createIfNotExists(tweetDoc)
+
+    await client
+      .patch(currentAccount)
+      .setIfMissing({ tweets: [] })
+      .insert('after', 'tweets[-1]', [
+        {
+          _key: tweetId,
+          _ref: tweetId,
+          _type: 'reference',
+        },
+      ])
+      .commit()
+
+    await fetchTweets()
   }
 
   return (
     <div className={style.wrapper}>
-      <div className={style.tweetBoxLeft}>{/* <Image /> */}</div>
+      <div className={style.tweetBoxLeft}>
+        <img
+          src={currentUser.profileImage}
+          className={
+            currentUser.isProfileImageNft
+              ? `${style.profileImage} smallocta`
+              : style.profileImage
+          }
+        />
+      </div>
       <div className={style.tweetBoxRight}>
         <form>
           <textarea

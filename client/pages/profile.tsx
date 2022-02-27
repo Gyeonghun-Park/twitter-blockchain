@@ -19,7 +19,7 @@ const profile = () => {
 const style = {
   wrapper: `flex h-screen w-screen select-none justify-center bg-[#15202b] text-white`,
   content: `flex w-2/3 max-w-[1400px] justify-between`,
-  mainContent: `flex-[2] overflow-y-scroll border-r border-l border-[#38444d]`,
+  mainContent: `flex-[2] border-r border-l border-[#38444d]`,
 }
 
 export default profile

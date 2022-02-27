@@ -31,7 +31,9 @@ const Post = ({
           src={profileImageLink}
           alt={userName}
           className={
-            true ? `${style.profileImage} smallHex` : style.profileImage
+            isProfileImageNft
+              ? `${style.profileImage} smallocta`
+              : `${style.profileImage} rounded-full`
           }
         />
       </div>
@@ -81,7 +83,7 @@ export default Post
 
 const style = {
   wrapper: `flex border-b border-[#38444d] p-3`,
-  profileImage: `h-[40px] w-[40px] rounded-full object-cover`,
+  profileImage: `h-[40px] w-[40px]`,
   postMain: `flex-1 px-4`,
   headerDetails: `flex items-center`,
   name: `mr-1 font-bold`,

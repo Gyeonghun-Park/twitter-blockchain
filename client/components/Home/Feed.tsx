@@ -1,5 +1,5 @@
-import { useContext, useEffect } from 'react'
 import { BsStars } from 'react-icons/bs'
+import { useTwitter } from '@contexts/TwitterContext'
 import { Post } from '@components'
 import { TweetBox } from '@components/Home'
 
@@ -17,6 +17,8 @@ interface TweetAuthor {
 }
 
 function Feed() {
+  const { tweets } = useTwitter()
+
   return (
     <div className={`${style.wrapper} no-scrollbar`}>
       <div className={style.header}>
@@ -24,7 +26,7 @@ function Feed() {
         <BsStars />
       </div>
       <TweetBox />
-      {[].map((tweet: Tweet, index: number) => (
+      {tweets.map((tweet: Tweet, index: number) => (
         <Post
           key={index}
           displayName={

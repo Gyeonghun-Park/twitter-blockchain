@@ -162,11 +162,6 @@ export function TwitterProvider({ children }: ProviderProps) {
     })
   }
 
-  /**
-   * Gets the current user details from Sanity DB.
-   * @param {String} userAccount Wallet address of the currently logged in user
-   * @returns null
-   */
   const getCurrentUserDetails = async (userAccount = currentAccount) => {
     if (appStatus !== 'connected') return
 

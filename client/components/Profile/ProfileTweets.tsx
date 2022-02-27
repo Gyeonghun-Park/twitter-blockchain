@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useTwitter } from '@contexts/TwitterContext'
 import { Post } from '@components'
 
 interface Tweet {
@@ -16,6 +17,7 @@ interface Author {
 }
 
 const ProfileTweets = () => {
+  const { currentUser } = useTwitter()
   const [tweets, setTweets] = useState<Tweets>([
     {
       timestamp: '',
@@ -29,9 +31,21 @@ const ProfileTweets = () => {
     isProfileImageNft: undefined,
   })
 
+  useEffect(() => {
+    if (!currentUser) return
+
+    setTweets(currentUser.tweets)
+    setAuthor({
+      name: currentUser.name,
+      profileImage: currentUser.profileImage,
+      walletAddress: currentUser.walletAddress,
+      isProfileImageNft: currentUser.isProfileImageNft,
+    })
+  }, [currentUser])
+
   return (
     <div className={style.wrapper}>
-      {[]?.map((tweet: Tweet, index: number) => (
+      {tweets?.map((tweet: Tweet, index: number) => (
         <Post
           key={index}
           displayName={
