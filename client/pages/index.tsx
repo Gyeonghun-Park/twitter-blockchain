@@ -1,4 +1,4 @@
-import { Sidebar } from '@components'
+import { Sidebar, Widgets } from '@components'
 import { Feed } from '@components/Home'
 
 function Home() {
@@ -6,7 +6,7 @@ function Home() {
     <div className={style.wrapper}>
       <Sidebar initialSelectedIcon="Home" />
       <Feed />
-      <h2>Widgets</h2>
+      <Widgets />
       <h2></h2>
     </div>
   )
