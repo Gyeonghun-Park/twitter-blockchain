@@ -15,5 +15,5 @@
 }
 
 .test {
-  @apply rounded-full bg-white px-3 py-1 text-xs font-bold text-black;
+  @apply mt-4 mb-2 flex justify-around text-xs font-semibold text-[#8899a6];
 }

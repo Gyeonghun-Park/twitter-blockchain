@@ -4,10 +4,11 @@ import { Feed } from '@components/Home'
 function Home() {
   return (
     <div className={style.wrapper}>
-      <Sidebar initialSelectedIcon="Home" />
-      <Feed />
-      <Widgets />
-      <h2></h2>
+      <div className={style.content}>
+        <Sidebar initialSelectedIcon="Home" />
+        <Feed />
+        <Widgets />
+      </div>
     </div>
   )
 }
