@@ -1,4 +1,4 @@
-import { Sidebar } from '@components/ui'
+import { Sidebar } from '@components'
 
 function Home() {
   return (

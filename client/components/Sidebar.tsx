@@ -1,5 +1,7 @@
 import { useState, useContext } from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import Modal from 'react-modal'
 import { RiHome7Line, RiHome7Fill, RiFileList2Fill } from 'react-icons/ri'
 import { BiHash } from 'react-icons/bi'
 import { FiBell, FiMoreHorizontal } from 'react-icons/fi'
@@ -13,7 +15,8 @@ import {
   BsPerson,
   BsPersonFill,
 } from 'react-icons/bs'
-import { SidebarOption } from '@components/ui'
+import { SidebarOption } from '@components'
+import { customStyles } from '@lib/constants'
 
 interface SidebarProps {
   initialSelectedIcon: string
@@ -21,6 +24,7 @@ interface SidebarProps {
 
 function Sidebar({ initialSelectedIcon }: SidebarProps) {
   const [selected, setSelected] = useState<String>(initialSelectedIcon)
+  const router = useRouter()
 
   return (
     <div className={style.wrapper}>
@@ -89,6 +93,12 @@ function Sidebar({ initialSelectedIcon }: SidebarProps) {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={Boolean(router.query.mint)}
+        onRequestClose={() => router.back()}
+        style={customStyles}
+      ></Modal>
     </div>
   )
 }
