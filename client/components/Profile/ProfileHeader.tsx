@@ -70,19 +70,11 @@ const ProfileHeader = () => {
         )}
       </div>
       <div className={style.profileImageContainer}>
-        <div
-          className={
-            currentUser.isProfileImageNft ? 'octa' : style.profileImageContainer
-          }
-        >
+        <div className={true ? 'octa' : style.profileImageContainer}>
           <img
             src={userData.profileImage}
             alt={userData.walletAddress}
-            className={
-              currentUser.isProfileImageNft
-                ? style.profileImageNft
-                : style.profileImage
-            }
+            className={true ? style.profileImageNft : style.profileImage}
           />
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useTwitter } from '@contexts/TwitterContext'
 import { useRouter } from 'next/router'
+import Modal from 'react-modal'
 import { RiHome7Line, RiHome7Fill, RiFileList2Fill } from 'react-icons/ri'
 import { BiHash } from 'react-icons/bi'
 import { FiBell, FiMoreHorizontal } from 'react-icons/fi'
@@ -14,7 +14,10 @@ import {
   BsPerson,
   BsPersonFill,
 } from 'react-icons/bs'
+import { useTwitter } from '@contexts/TwitterContext'
+import { customStyles } from '@lib/constants'
 import { SidebarOption } from '@components'
+import { ProfileImageMinter } from '@components/Profile/mintingModal'
 
 interface SidebarProps {
   initialSelectedIcon: string
@@ -109,6 +112,14 @@ function Sidebar({ initialSelectedIcon }: SidebarProps) {
           </div>
         </div>
       </div>
+
+      <Modal
+        isOpen={Boolean(router.query.mint)}
+        onRequestClose={() => router.back()}
+        style={customStyles}
+      >
+        <ProfileImageMinter />
+      </Modal>
     </div>
   )
 }
